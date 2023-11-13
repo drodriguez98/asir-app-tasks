@@ -4,6 +4,6 @@
 	define("DBNAME", "asirAppTasks");
 	define("USER", "asirAppTasks");
 	define("PASSWORD", "abc123.");
-	define("NUMELEMENTS", 4);
+	define("NUMELEMENTS", 10);
 	
 ?>

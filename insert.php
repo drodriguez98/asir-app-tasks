@@ -47,10 +47,10 @@
             </div>
 
         </div>
-
-        <br>
-        
-        <button type="submit" class="btn btn-primary" name="btn-enviar">Insert</button>
+		
+        <div class="nav-container-insert">
+			<button type="submit" class="btn btn-primary" name="btn-enviar">Insert</button>
+		</div>
 
     </form>
 
@@ -58,79 +58,89 @@
 
 <?php include ('inc/header.php'); ?>
 
-<h1>Insert task</h1>
+	<body>
 
-<?php
-	
-    if (!isset($_REQUEST['btn-enviar'])) {
+		<main class="container">
 
-        $name = "";
-        $description = "";
-        $priority = "";
+			<h1>Insert task</h1>
 
-        showForm ($name, $description, $priority);
-		
-
-    } else {
-
-        $name = collect('name');
-        $description = collect('description');
-        $priority = collect('priority');
-
-        $errors = "";
-
-        if ($name == "") { $errors.= "<li>Debes introducir un nombre</li>"; }
-
-        if ($description == "") { $errors.= "<li>Debes introducir una descripción</li>"; }
-
-        if ($priority == "") { $errors.= "<li>Debes introducir una prioridad</li>"; }
-
-        if ($errors != "") {
-			
-			echo "<div class='alert alert-danger' role= 'alert'>";
-			
-				echo "<ul>$errors</ul>";
-				echo "</hr>";
-			
-			echo "</div>";
-
-            showForm ($name, $description, $priority);
-        
-        } else {
-
-            $taskId = insertTask ($name, $description, $priority);
-			
-			if ($taskId) { 
-			
-            ?>	
+			<?php
 				
-				<div class="alert alert-s" role= "alert">
-				
-					<h2>Task <?=$taskId ?> inserted </h2>
-                    
-					<p><a href='index.php' class='btn btn-success'>Go home</a></p>
-				
-				</div>
-				
-            <?php } else { ?>
-			
-				<div class="alert alert-danger" role= "alert">
-				
-					<h2>Errors</h2>
-					<p>Task not inserted</p>
+				if (!isset($_REQUEST['btn-enviar'])) {
+
+					$name = "";
+					$description = "";
+					$priority = "";
+
+					showForm ($name, $description, $priority);
 					
-				</div>
-			
-            <?php
-			
-				showForm ($name, $description, $priority);
-			
-			}
-		
-		}
-	
-	}
-				
-?>
 
-<?php include ("inc/footer.php"); ?>
+				} else {
+
+					$name = collect('name');
+					$description = collect('description');
+					$priority = collect('priority');
+
+					$errors = "";
+
+					if ($name == "") { $errors.= "<li>Debes introducir un nombre</li>"; }
+
+					if ($description == "") { $errors.= "<li>Debes introducir una descripción</li>"; }
+
+					if ($priority == "") { $errors.= "<li>Debes introducir una prioridad</li>"; }
+
+					if ($errors != "") {
+						
+						echo "<div class='alert alert-danger' role= 'alert'>";
+						
+							echo "<ul>$errors</ul>";
+							echo "</hr>";
+						
+						echo "</div>";
+
+						showForm ($name, $description, $priority);
+					
+					} else {
+
+						$taskId = insertTask ($name, $description, $priority);
+						
+						if ($taskId) { 
+						
+						?>	
+							
+							<div class="alert alert-s" role= "alert">
+							
+								<h2>Task <?=$taskId ?> inserted </h2>
+								
+								<p><a href='index.php' class='btn btn-success'>Go home</a></p>
+							
+							</div>
+							
+						<?php } else { ?>
+						
+							<div class="alert alert-danger" role= "alert">
+							
+								<h2>Errors</h2>
+								<p>Task not inserted</p>
+								
+							</div>
+						
+						<?php
+						
+							showForm ($name, $description, $priority);
+						
+						}
+					
+					}
+				
+				}
+							
+			?>
+			
+		</main>
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"  crossorigin="anonymous"></script>
+	
+	</body>
+	
+</html>

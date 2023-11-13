@@ -3,17 +3,27 @@
 <?php include ('inc/database.php'); ?>
 <?php include ("inc/header.php"); ?>
 
-<h1>Session finished</h1>
 
-<?php 
+	<body>
 
-    echo "Good bye ".$_SESSION['user'];
+		<main class="container">
 
-    echo "<br><br>";
+			<h1>Session finished</h1>
 
-    unset($_SESSION['user']);
+			<?php 
 
-?>
+				echo "Good bye ".$_SESSION['user'];
 
-<a href="login.php" class="btn btn-success">Login</a>
+				echo "<br><br>";
 
+				unset($_SESSION['user']);
+
+			?>
+
+			<a href="login.php" class="btn btn-success">Login</a>
+			
+		</main>
+		
+	</body>
+	
+</html>

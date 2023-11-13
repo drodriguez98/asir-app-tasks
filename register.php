@@ -30,83 +30,93 @@
 		</div>
 
 		<br>
+		
+		<div class="nav-container">
 
-		<button type="submit" class="btn btn-primary" name="btn-enviar">Register</button>
+			<button type="submit" class="btn btn-primary" name="btn-enviar">Register</button>
+		
+		</div>
 
 	</form>
 
 <?php } ?>
 
-<h1 class="mt-3 text-center">Register</h1>
+	<body>
 
-<?php
+		<main class="container">
 
-    if (!isset($_REQUEST['btn-enviar'])) {
+		<h1 class="mt-3 text-center">Register</h1>
 
-		$name = "";
-		$username = "";	
-		$password = "";
-		
-        showForm ($name, $username, $password);
-	
-	} else {		
+		<?php
 
-		$name = collect('name');	
-		$username = collect('username');	
-		$password = collect('password');
+			if (!isset($_REQUEST['btn-enviar'])) {
 
-		$errors = "";	
-		
-		if ($name == "") { $errors.= "<li>Debes introducir un nombre</li>"; }
-
-		if ($username == "") {
-	
-			$errors.= "<li>Debes introducir un usuario</li>";
-	
-		} else {
-
-			$repeated = selectUser ($username);
-
-			if ($repeated) { $errors.= "<li>Ya existe un usuario con ese nombre</li>"; }
-
-		}
-	
-		if ($password == "")  { $errors.= "<li>Debes introducir una contraseña</li>"; }
-
-		if ($errors != "") {		
+				$name = "";
+				$username = "";	
+				$password = "";
+				
+				showForm ($name, $username, $password);
 			
-			echo "<div class='alert alert-danger' role='alert'>";
+			} else {		
 
-				echo "<ul>$errors</ul>";
-				echo "</hr>";
+				$name = collect('name');	
+				$username = collect('username');	
+				$password = collect('password');
 
-			echo "</div>";
+				$errors = "";	
+				
+				if ($name == "") { $errors.= "<li>Debes introducir un nombre</li>"; }
 
-			showForm ($name, $username, $password);
-        
-        } else {
+				if ($username == "") {
+			
+					$errors.= "<li>Debes introducir un usuario</li>";
+			
+				} else {
 
-			$register = register ($name, $username, $password);
+					$repeated = selectUser ($username);
 
-			if ($register == 0) {	
+					if ($repeated) { $errors.= "<li>Ya existe un usuario con ese nombre</li>"; }
 
-				echo "<p>No se ha podido realizar la operación</p>";
+				}
+			
+				if ($password == "")  { $errors.= "<li>Debes introducir una contraseña</li>"; }
 
-			} else {	
+				if ($errors != "") {		
+					
+					echo "<div class='alert alert-danger' role='alert'>";
 
-				$_SESSION['user'] = $username;
-				header("Location: register-success.php");
+						echo "<ul>$errors</ul>";
+						echo "</hr>";
+
+					echo "</div>";
+
+					showForm ($name, $username, $password);
+				
+				} else {
+
+					$register = register ($name, $username, $password);
+
+					if ($register == 0) {	
+
+						echo "<p>No se ha podido realizar la operación</p>";
+
+					} else {	
+
+						$_SESSION['user'] = $username;
+						header("Location: register-success.php");
+
+					}
+
+				}
 
 			}
 
-		}
-
-	}
-
-?>
-
+		?>
+		
+		</main>
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"  crossorigin="anonymous"></script>
+		
 	</body>
-
+	
 </html>
-
-<?php include("inc/footer.php"); ?>

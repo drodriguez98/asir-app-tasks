@@ -13,82 +13,89 @@
 
 		<div class="mb-3">
 
-		<label for="username" class="form-label">Enter your username</label>
-		<input type="text" class="form-control" id="username" name="username" value="<?=$username ?>"/>
+			<label for="username" class="form-label">Enter your username</label>
+			<input type="text" class="form-control" id="username" name="username" value="<?=$username ?>"/>
 
 		</div>
 		
 		<div class="mb-3">
 
-		<label for="password" class="form-label">Enter your password </label>
-		<input type="password" class="form-control" id="password" name="password" value="<?=$password ?>">
+			<label for="password" class="form-label">Enter your password </label>
+			<input type="password" class="form-control" id="password" name="password" value="<?=$password ?>">
 
-		<br>
-
-		<button type="submit" class="btn btn-primary" name="btn-enviar">Login</button>
-
-		<a href="register.php" class="btn btn-success">I have not an account</a>
+		</div>
+		
+		<div class="nav-container">
+			<button type="submit" class="btn btn-primary" name="btn-enviar">Login</button>
+			<a href="register.php" class="btn btn-success">I have not an account</a>
+		</div>
 
 	</form>
 
 <?php } ?>
 
-<h1 class="mt-3 text-center">Login</h1>
+	<body>
 
-<?php
+		<main class="container">
 
-    if (!isset($_REQUEST['btn-enviar'])) {		
+		<h1 class="mt-3 text-center">Login</h1>
 
-		$username = "";	
-		$password = "";
-		
-        showForm ($username, $password);
-	
-	} else {		
+		<?php
 
-		$username = collect('username');	
-		$password = collect('password');
+			if (!isset($_REQUEST['btn-enviar'])) {		
 
-		$errors = "";	
-
-		if ($username == "") { $errors.= "<li>Debes introducir un usuario</li>"; }
-	
-		if ($password == "") { $errors.= "<li>Debes introducir una contraseña</li>"; }
-
-		if ($errors != "") {		
+				$username = "";	
+				$password = "";
+				
+				showForm ($username, $password);
 			
-			echo "<div class='alert alert-danger' role='alert'>";
+			} else {		
+
+				$username = collect('username');	
+				$password = collect('password');
+
+				$errors = "";	
+
+				if ($username == "") { $errors.= "<li>Debes introducir un usuario</li>"; }
 			
-				echo "<ul>$errors</ul>";
-				echo "</hr>";
-			
-			echo "</div>";
+				if ($password == "") { $errors.= "<li>Debes introducir una contraseña</li>"; }
 
-			showForm ($username, $password);
-        
-        } else {		
+				if ($errors != "") {		
+					
+					echo "<div class='alert alert-danger' role='alert'>";
+					
+						echo "<ul>$errors</ul>";
+						echo "</hr>";
+					
+					echo "</div>";
 
-			$login = login ($username, $password);	
+					showForm ($username, $password);
+				
+				} else {		
 
-			if ($login == 0) {	
+					$login = login ($username, $password);	
 
-				echo "<p>Usuario y/o password incorrectos</p>";
+					if ($login == 0) {	
 
-			} else {	
+						echo "<p>Usuario y/o password incorrectos</p>";
 
-				$_SESSION['user'] = $username;
-				header("Location: index.php");
+					} else {	
+
+						$_SESSION['user'] = $username;
+						header("Location: index.php");
+
+					}
+
+				}
 
 			}
-
-		}
-
-	}
-
-?>
+			
+		?>
+			
+		</main>
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"  crossorigin="anonymous"></script>
 
 	</body>
 
 </html>
-
-<?php include("inc/footer.php"); ?>
