@@ -1,6 +1,6 @@
-CREATE DATABASE TASKS;
+CREATE DATABASE asirAppTasks;
 
-USE TASKS;
+USE asirAppTasks;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,8 +26,8 @@ INSERT INTO `tasks` (`taskId`, `name`, `description`, `priority`) VALUES
 (1, 'Task 1', 'Create design', 'Medium'),
 (2, 'Task 2', 'Add controllers in backend', 'High');
 
-CREATE USER 'tasks'@'localhost' IDENTIFIED BY 'abc123.';
-GRANT ALL PRIVILEGES ON *.* TO 'tasks'@'localhost' WITH GRANT OPTION;
+CREATE USER 'asirAppTasks'@'localhost' IDENTIFIED BY 'abc123.';
+GRANT ALL PRIVILEGES ON *.* TO 'asirAppTasks'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 COMMIT;

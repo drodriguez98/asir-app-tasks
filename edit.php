@@ -96,9 +96,9 @@
 		
 		} 
 		
-		$name = $task['nombre'];
-        $description = $task['descripcion'];
-        $priority = $task['prioridad'];
+		$name = $task['name'];
+        $description = $task['description'];
+        $priority = $task['priority'];
 
         showForm ($taskId, $name, $description, $priority);
 	
@@ -106,10 +106,10 @@
 	
     } else {
 		
-		$taskId= collect('id_tarea');
-        $name = collect('nombre');
-        $description = collect('descripcion');
-        $priority = collect('prioridad');
+		$taskId= collect('taskId');
+        $name = collect('name');
+        $description = collect('description');
+        $priority = collect('priority');
 
         $errors = "";
 
