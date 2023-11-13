@@ -1,87 +1,74 @@
 <?php session_start(); ?>
 
-<?php include ('inc/funciones.php'); ?>
-<?php include ('inc/bbdd.php'); ?>
+<?php include ('inc/functions.php'); ?>
+<?php include ('inc/database.php'); ?>
 <?php include ('inc/header.php'); ?>
 
 
 <!--		Función para mostrar el formulario de login		-->
 
-<?php function mostrarFormulario ($usuario, $password) { ?>
+<?php function showForm ($username, $password) { ?>
 
 	<form method="get">
 
 		<div class="mb-3">
 
-		<label for="usuario" class="form-label">Introduce tu usuario</label>
-		<input type="text" class="form-control" id="usuario" name="usuario" value="<?=$usuario ?>"/>
+		<label for="username" class="form-label">Enter your username</label>
+		<input type="text" class="form-control" id="username" name="username" value="<?=$username ?>"/>
 
 		</div>
 		
 		<div class="mb-3">
 
-		<label for="password" class="form-label">Introduce tu contraseña</label>
+		<label for="password" class="form-label">Enter your password </label>
 		<input type="password" class="form-control" id="password" name="password" value="<?=$password ?>">
 
 		<br>
 
-		<button type="submit" class="btn btn-primary" name="btn-enviar">Enviar</button>
+		<button type="submit" class="btn btn-primary" name="btn-enviar">Login</button>
 
-		<a href="registro.php" class="btn btn-success">No tengo una cuenta de usuario</a>
+		<a href="register.php" class="btn btn-success">I have not an account</a>
 
 	</form>
 
 <?php } ?>
 
-<h1 class="mt-3 text-center">Iniciar sesión</h1>
-
-
-<!--	Recogida de datos. Si no hay errores llama a la función de login. Si la operación no devuelve ninguna fila muestra un error	pero si devuelve alguna se inicia la sesión con el usuario introducido y redirige a la página confirmación.		-->
+<h1 class="mt-3 text-center">Login</h1>
 
 <?php
 
     if (!isset($_REQUEST['btn-enviar'])) {		
 
-		$usuario = "";	
+		$username = "";	
 		$password = "";
 		
-        mostrarFormulario ($usuario, $password);
+        showForm ($username, $password);
 	
 	} else {		
 
-		$usuario = recoge('usuario');	
-		$password = recoge('password');
+		$username = collect('username');	
+		$password = collect('password');
 
-		$errores = "";	
+		$errors = "";	
 
-		if ($usuario == "") {
+		if ($username == "") { $errors.= "<li>Debes introducir un usuario</li>"; }
 	
-			$errores.= "<li>Debes introducir un usuario</li>";
-	
-		}
-	
-		if ($password == "") {
-	
-			$errores.= "<li>Debes introducir una contraseña</li>";
-	
-		}
+		if ($password == "") { $errors.= "<li>Debes introducir una contraseña</li>"; }
 
-		if ($errores != "") {		
+		if ($errors != "") {		
 			
 			echo "<div class='alert alert-danger' role='alert'>";
 			
-				echo "<ul>$errores</ul>";
+				echo "<ul>$errors</ul>";
 				echo "</hr>";
 			
 			echo "</div>";
 
-			mostrarFormulario ($usuario, $password);
+			showForm ($username, $password);
         
-        } 
-		
-		else {		
+        } else {		
 
-			$login = login ($usuario, $password);	
+			$login = login ($username, $password);	
 
 			if ($login == 0) {	
 
@@ -89,9 +76,8 @@
 
 			} else {	
 
-				$_SESSION['usuario'] = $usuario;
-				
-				header("Location: listado.php");
+				$_SESSION['user'] = $username;
+				header("Location: index.php");
 
 			}
 

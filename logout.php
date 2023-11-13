@@ -1,19 +1,19 @@
 <?php session_start(); ?>
 
-<?php include ('inc/bbdd.php'); ?>
+<?php include ('inc/database.php'); ?>
 <?php include ("inc/header.php"); ?>
 
-<h1>Sesión finalizada</h1>
+<h1>Session finished</h1>
 
 <?php 
 
-    echo "Hasta la próxima ".$_SESSION['usuario'];
+    echo "Good bye ".$_SESSION['user'];
 
     echo "<br><br>";
 
-    unset($_SESSION['usuario']);
+    unset($_SESSION['user']);
 
 ?>
 
-<a href="login.php" class="btn btn-success">Iniciar sesión</a>
+<a href="login.php" class="btn btn-success">Login</a>
 

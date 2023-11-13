@@ -2,7 +2,7 @@
 
 #	Función para recoger los datos de los formularios.
 	
-	function recoge($var, $m = "") {
+	function collect($var, $m = "") {
 		
 		$tmp = is_array($m) ? [] : "";
 		
